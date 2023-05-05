@@ -3,7 +3,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [tweet, setTweet] = useState("");
+  const [tweet, setTweet] = useState(null);
+  console.log("TWEET", tweet);
   async function fetcher(data: { question: string }) {
     try {
       setLoading(true);
@@ -29,14 +30,21 @@ export default function Home() {
         <input type="text" id="question" name="question" />
         <button disabled={loading}>submit</button>
       </form>
-      {loading ? (
+      {loading || !tweet ? (
         <>loading..</>
       ) : (
-        <code>
-          <pre style={{ whiteSpace: "pre-wrap" }}>
-            {JSON.stringify(tweet, null, 4)}
-          </pre>
-        </code>
+        <>
+          <h2>{tweet.message.tweet}</h2>
+          <img
+            alt="image"
+            src={`data:image/png;base64,${tweet.files[0].content}`}
+          />
+          <code>
+            <pre style={{ whiteSpace: "pre-wrap" }}>
+              {JSON.stringify(tweet, null, 4)}
+            </pre>
+          </code>
+        </>
       )}
     </>
   );

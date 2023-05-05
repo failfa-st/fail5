@@ -1,11 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Agent, sequence, createInstruction, ModelMessage } from "@hyv/core";
-import { GPTModelAdapter } from "@hyv/openai";
+import { GPTModelAdapter, DallEModelAdapter } from "@hyv/openai";
 
-type Data = {
-  message: ModelMessage;
-};
+type Data = Record<string, any>;
+
+const result: Record<string, unknown> = {};
 
 export default function handler(
   req: NextApiRequest,
@@ -16,55 +16,49 @@ export default function handler(
     new GPTModelAdapter({
       systemInstruction: createInstruction(
         "Social Media Expert",
-        "You think, you reason your thoughts, you reflect on your reasoning, you write immoral tweets about todays headline",
+        `You think, you reason your thoughts, you reflect on your reasoning, you write ABSURD IMMORAL TWEETS about todays headline
+        Describe images for the tweet.
+        Add a prompt for each image.
+        `,
         {
           thought: "string",
           reason: "string",
           reflection: "string",
           tweet: "string",
-        }
-      ),
-    })
-  );
-  const tweeter = new Agent(
-    new GPTModelAdapter({
-      systemInstruction: createInstruction(
-        "Social Media Expert",
-        "You think, you reason your thoughts, you reflect on your reasoning, you ADD EMOJIS",
-        {
-          thought: "string",
-          reason: "string",
-          reflection: "string",
-          originalTweet: "originalTweet",
-          tweet: "tweet ++<=3 EMOJIS ",
+          images: [
+            {
+              prompt: "detailed string",
+            },
+          ],
         }
       ),
     }),
     {
-      //@ts-ignore
-      before: async (message) => {
-        return { originalTweet: message.tweet } as ModelMessage;
-      },
       after: async (message) => {
-        return { message };
+        result.message = message;
+        return message;
       },
-      sideEffects: [
-        {
-          prop: "message",
-          run: async (message: { message: ModelMessage }) => {
-            res.status(200).json({ message });
-          },
-        },
-      ],
     }
   );
+
+  const illustrator = new Agent(new DallEModelAdapter(), {
+    sideEffects: [
+      {
+        prop: "files",
+        run: async (files) => {
+          res.status(200).json({ ...result, files });
+        },
+      },
+    ],
+  });
 
   sequence(
     {
       headline: req.body.question,
       characterLength: 288,
+      imageCount: 1,
       writingStyle: "Hipster",
     },
-    [socialMediaExpert, tweeter]
+    [socialMediaExpert, illustrator]
   );
 }
