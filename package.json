@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hyv/core": "^0.2.0",
+    "@hyv/openai": "^0.2.0",
+    "@hyv/store": "^0.2.0",
     "@types/node": "20.0.0",
     "@types/react": "18.2.5",
     "@types/react-dom": "18.2.4",
+    "axios": "^1.4.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.4.1",
     "next": "13.4.1",
