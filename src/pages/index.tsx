@@ -27,7 +27,7 @@ export default function Home() {
           fetcher(data as { question: string });
         }}
       >
-        <input type="text" id="question" name="question" />
+        {/* <textarea id="question" name="question" /> */}
         <button disabled={loading}>submit</button>
       </form>
       {loading || !tweet ? (
@@ -35,15 +35,19 @@ export default function Home() {
       ) : (
         <>
           <h2>{tweet.message.tweet}</h2>
+          <h3>Thought: {tweet.message.thought}</h3>
+          <h3>Reason: {tweet.message.reason}</h3>
+          <h3>Reflection: {tweet.message.reflection}</h3>
+          <h4>Image prompt: {tweet.message.images[0].prompt}</h4>
           <img
             alt="image"
             src={`data:image/png;base64,${tweet.files[0].content}`}
           />
-          <code>
+          {/* <code>
             <pre style={{ whiteSpace: "pre-wrap" }}>
               {JSON.stringify(tweet, null, 4)}
             </pre>
-          </code>
+          </code> */}
         </>
       )}
     </>
