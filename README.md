@@ -2,6 +2,12 @@
 
 <p align="center"><img src="public/logo.png" alt="logo" width="200"/></p>
 
+> This project is built to fail  
+> (until it doesn't)  
+> Restart until it is good enough
+
+# Tweet Generator
+
 fail5 is a Next.js project that generates humorous tweets using OpenAI's GPT-4 API, DALL-E and Agent chaining using [Hyv](https://github.com/failfa-st/hyv).
 
 ![x-better-y ui](/public/x-better-y-ui.png)
