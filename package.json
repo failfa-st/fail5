@@ -1,7 +1,29 @@
 {
-  "name": "tweet-gpt",
-  "version": "0.1.0",
-  "private": true,
+  "name": "fail5",
+  "version": "1.0.0",
+  "description": "Funny Tweet Generator",
+  "keywords": [
+    "ai",
+    "artificial intelligence",
+    "javascript",
+    "gpt",
+    "gpt-4"
+  ],
+  "license": "AGPL",
+  "author": {
+    "name": "Dominik Hautau",
+    "url": "https://github.com/doemser/"
+  },
+  "contributors": [
+    {
+      "name": "Gregor Adams",
+      "url": "https://github.com/pixelass/"
+    },
+    {
+      "name": "Tim Pietrusky",
+      "url": "https://github.com/NERDDISCO/"
+    }
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
