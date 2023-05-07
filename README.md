@@ -12,7 +12,7 @@ fail5 is a Next.js project that generates humorous tweets using OpenAI's GPT-4 A
 
 ![x-better-y ui](/public/x-better-y-ui.png)
 
-We AI generate funny tweets you can find on twitter:
+We use AI to generate funny tweets you can find on twitter:
 
 > [x better y](https://twitter.com/XbetterY)
 
@@ -30,3 +30,9 @@ That´s it.
 ## Don't have GPT-4 Access yet?
 
 Go to `/src/pages/api/x-better-y.ts` and change the model.
+
+## The Hyv
+
+1. Two random words from https://random-word-form.herokuapp.com/ API
+2. Social media savant' with a talent for creating humorous, shareable content that captivates online audiences.
+3. Illustrator specialized on Flat Design: A minimalist approach with solid colors and a focus on simplicity and few colors.
